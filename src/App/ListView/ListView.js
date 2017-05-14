@@ -27,7 +27,12 @@ export class ListView extends Component {
     return (
       <ul className='list-view'>
         {this.state.posts.map( post => (
-          <ListItem key={post.data.id} title={post.data.title} thumbnail={post.data.thumbnail} />
+          <ListItem
+            key={post.data.id}
+            linkTo={`/${post.data.id}`}
+            title={post.data.title}
+            thumbnail={post.data.thumbnail}
+          />
         ))}
       </ul>
     )

@@ -1,21 +1,25 @@
 import React, { Component } from 'react';
+import {
+  BrowserRouter as Router,
+  Route,
+} from 'react-router-dom'
+
 import Header from './Header'
 import ListView from './ListView'
+import ListItem from './ListItem'
 
 import './App.scss';
 
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <Header />
-        <ListView />
-        <div>
-          <p className="App-intro">
-            To get started, edit <code>src/App.js</code> and save to reload.
-          </p>
+      <Router>
+        <div className="App">
+          <Header />
+          <Route path="/" component={ListView} />
+          <Route path='/:id' component={ListItem} />
         </div>
-      </div>
+      </Router>
     );
   }
 }
