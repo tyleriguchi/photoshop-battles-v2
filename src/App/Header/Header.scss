@@ -1,5 +1,7 @@
 
 .top-nav {
+  position: relative;
+  
   &:after {
     content: '';
     position: absolute;
