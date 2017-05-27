@@ -6,6 +6,8 @@ import {
 
 import request from 'axios'
 
+import { formatData } from './utils'
+
 import Header from './Header'
 import ListView from './ListView'
 import ListItem from './ListItem'
@@ -17,11 +19,11 @@ class App extends Component {
     posts: []
   }
 
-  componentDidMount() {
-    request(`https://www.reddit.com/r/photoshopbattles.json`).then( ({data}) => {
-      this.setState({
-        posts: data.data.children
-      })
+  async componentDidMount() {
+    const posts = await request(`https://www.reddit.com/r/photoshopbattles.json`)
+
+    this.setState({
+      posts: formatData(posts)
     })
   }
 

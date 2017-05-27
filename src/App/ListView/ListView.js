@@ -15,26 +15,26 @@ export class ListView extends Component {
     if (pathname === '/') {
       const list = posts.map( post => (
         <ListItem
-          key={post.data.id}
-          linkTo={`/${post.data.id}`}
-          title={post.data.title}
-          thumbnail={post.data.thumbnail}
+          key={post.id}
+          linkTo={`/${post.id}`}
+          title={post.title}
+          thumbnail={post.thumbnail}
         />
       ))
       console.log('lst', list)
       return list
     }
     else {
-      const matchingPost = posts.find( post => post.data.id === pathname.substring(1))
+      const matchingPost = posts.find( post => post.id === pathname.substring(1))
 
       if (!matchingPost) return null
       console.log(matchingPost)
       return (
           <ListItem
-            key={matchingPost.data.id}
-            linkTo={`/${matchingPost.data.id}`}
-            title={matchingPost.data.title}
-            thumbnail={matchingPost.data.thumbnail}
+            key={matchingPost.id}
+            linkTo={`/${matchingPost.id}`}
+            title={matchingPost.title}
+            thumbnail={matchingPost.thumbnail}
           />
       )
     }
@@ -45,9 +45,9 @@ export class ListView extends Component {
     return (
       <div>
         <ul className='list-view'>
-          <FlipMove duration={750} easing="ease-out">
+          {/*<FlipMove duration={750} easing="ease-out">*/}
             {this.renderItems()}
-          </FlipMove>
+          {/*</FlipMove>*/}
         </ul>
       </div>
     )
