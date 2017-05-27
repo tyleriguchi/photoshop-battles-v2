@@ -2,39 +2,54 @@ import React, { Component } from 'react'
 // import PropTypes from 'prop-types'
 import './ListView.css'
 
-import request from 'axios'
+import FlipMove from 'react-flip-move';
 
 import ListItem from '../ListItem'
 
 export class ListView extends Component {
-  constructor(props) {
-    super(props)
 
-    this.state = {
-      posts: []
+  renderItems() {
+    const { posts, location: { pathname } } = this.props
+    console.log('path', pathname)
+
+    if (pathname === '/') {
+      const list = posts.map( post => (
+        <ListItem
+          key={post.data.id}
+          linkTo={`/${post.data.id}`}
+          title={post.data.title}
+          thumbnail={post.data.thumbnail}
+        />
+      ))
+      console.log('lst', list)
+      return list
+    }
+    else {
+      const matchingPost = posts.find( post => post.data.id === pathname.substring(1))
+
+      if (!matchingPost) return null
+      console.log(matchingPost)
+      return (
+          <ListItem
+            key={matchingPost.data.id}
+            linkTo={`/${matchingPost.data.id}`}
+            title={matchingPost.data.title}
+            thumbnail={matchingPost.data.thumbnail}
+          />
+      )
     }
   }
 
-  componentDidMount() {
-    request(`https://www.reddit.com/r/photoshopbattles.json`).then( ({data}) => {
-      this.setState({
-        posts: data.data.children
-      })
-    })
-  }
-
   render() {
+    console.log('props', this.props)
     return (
-      <ul className='list-view'>
-        {this.state.posts.map( post => (
-          <ListItem
-            key={post.data.id}
-            linkTo={`/${post.data.id}`}
-            title={post.data.title}
-            thumbnail={post.data.thumbnail}
-          />
-        ))}
-      </ul>
+      <div>
+        <ul className='list-view'>
+          <FlipMove duration={750} easing="ease-out">
+            {this.renderItems()}
+          </FlipMove>
+        </ul>
+      </div>
     )
   }
 }

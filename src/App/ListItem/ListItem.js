@@ -7,7 +7,7 @@ export default function ListItem(props) {
   const { title, thumbnail, linkTo } = props
 
   if (!thumbnail || thumbnail === 'self') return null
-  console.log('to', thumbnail, linkTo)
+
   return (
     <li>
       <Link to={linkTo} className='list-item'>
