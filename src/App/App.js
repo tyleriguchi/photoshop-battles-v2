@@ -20,6 +20,7 @@ class App extends Component {
   }
 
   async componentDidMount() {
+
     const posts = await request(`https://www.reddit.com/r/photoshopbattles.json`)
 
     this.setState({

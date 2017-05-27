@@ -1,12 +1,18 @@
 import React, { Component } from 'react'
 // import PropTypes from 'prop-types'
-import './ListView.css'
-
+import { connect } from 'react-redux'
 import FlipMove from 'react-flip-move';
 
+import './ListView.css'
+
+import { requestPosts } from '../data/posts'
 import ListItem from '../ListItem'
 
 export class ListView extends Component {
+
+  async componentDidMount() {
+    await requestPosts()
+  }
 
   renderItems() {
     const { posts, location: { pathname } } = this.props
@@ -54,4 +60,8 @@ export class ListView extends Component {
   }
 }
 
-export default ListView
+const mapStateToProps = (state) => ({
+  posts: get(state, 'posts')
+})
+
+export default connect()(ListView)
