@@ -15,19 +15,6 @@ import ListItem from './ListItem'
 import './App.scss';
 
 class App extends Component {
-  state = {
-    posts: []
-  }
-
-  async componentDidMount() {
-
-    const posts = await request(`https://www.reddit.com/r/photoshopbattles.json`)
-
-    this.setState({
-      posts: formatData(posts)
-    })
-  }
-
   render() {
     return (
       <Router>
@@ -36,7 +23,7 @@ class App extends Component {
           <Route
             children={ ({ match, ...rest } ) => (
               <div>
-                {match && <ListView posts={this.state.posts} {...rest}/>}
+                {match && <ListView {...rest}/>}
               </div>
             )}
           />

@@ -1,9 +1,11 @@
 import { combineReducers } from 'redux'
 
-import { postsReducer } from './posts'
+import { posts, sagas } from './posts'
 
-const reducers = combineReducers(
-  postsReducer
-)
+console.log('posts', posts)
+const reducers = combineReducers({
+  posts
+})
 
 export {reducers}
+export {sagas}

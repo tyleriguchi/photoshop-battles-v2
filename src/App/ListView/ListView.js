@@ -5,18 +5,18 @@ import FlipMove from 'react-flip-move';
 
 import './ListView.css'
 
-import { requestPosts } from '../data/posts'
+// import { requestPosts } from '../data/posts'
+import { getPosts } from '../../data/posts'
+
 import ListItem from '../ListItem'
 
 export class ListView extends Component {
-
-  async componentDidMount() {
-    await requestPosts()
+  hasMatch(posts, pathname) {
+    return posts.find( post => post.id === pathname.substring(1))
   }
 
   renderItems() {
     const { posts, location: { pathname } } = this.props
-    console.log('path', pathname)
 
     if (pathname === '/') {
       const list = posts.map( post => (
@@ -27,14 +27,13 @@ export class ListView extends Component {
           thumbnail={post.thumbnail}
         />
       ))
-      console.log('lst', list)
       return list
     }
     else {
-      const matchingPost = posts.find( post => post.id === pathname.substring(1))
+      const matchingPost = this.hasMatch(posts, pathname)
 
       if (!matchingPost) return null
-      console.log(matchingPost)
+
       return (
           <ListItem
             key={matchingPost.id}
@@ -47,7 +46,6 @@ export class ListView extends Component {
   }
 
   render() {
-    console.log('props', this.props)
     return (
       <div>
         <ul className='list-view'>
@@ -61,7 +59,7 @@ export class ListView extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  posts: get(state, 'posts')
+  posts: getPosts(state)
 })
 
-export default connect()(ListView)
+export default connect(mapStateToProps)(ListView)
