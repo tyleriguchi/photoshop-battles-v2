@@ -1,21 +1,18 @@
 // import { requestPosts } from './actions'
-import { combineReducers } from 'redux'
-import sagas from './sagas'
-import {getPosts} from './selectors'
-import posts from './reducer'
 
-// export {requestPosts}
+import {fetchPosts} from './actions'
+import postSagas from './sagas'
+import {getPosts} from './selectors'
+import posts from './reducers'
+
+//actions
+export {fetchPosts}
 
 //reducers
-// const posts = {
-//   byId,
-//   ids
-// }
-
 export {posts}
 
 //sagas
-export {sagas}
+export {postSagas}
 
 //selectors
 export {getPosts}

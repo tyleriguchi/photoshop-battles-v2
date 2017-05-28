@@ -1,4 +1,4 @@
-import { call, put, takeEvery, all } from 'redux-saga/effects'
+import { call, fork, put, takeLatest, all } from 'redux-saga/effects'
 
 export function fetchPostsApi() {
     return fetch(`http://www.reddit.com/r/photoshopbattles.json` )
@@ -9,11 +9,10 @@ export function fetchPostsApi() {
 export function* requestPosts() {
   yield put({type: 'REQUEST_POSTS'})
   const posts = yield call(fetchPostsApi)
+  console.log('yeilded posts', posts)
   yield put({ type: 'RECEIVED_POSTS', posts })
 }
-// dont auto boot it
-export default function* rootPostsSaga() {
-  yield all([
-    requestPosts()
-  ])
+
+export default function* postSagas() {
+  yield takeLatest('POSTS_REQUESTED', requestPosts)
 }

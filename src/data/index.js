@@ -1,11 +1,21 @@
 import { combineReducers } from 'redux'
+import { all } from 'redux-saga/effects'
+import { posts, postSagas as sagas } from './posts'
 
-import { posts, sagas } from './posts'
+import { comments, commentSagas } from './comments'
 
-console.log('posts', posts)
 const reducers = combineReducers({
-  posts
+  posts,
+  comments,
 })
 
 export {reducers}
+
+// const sagas = function*() {
+//   return yield all([
+//     postSagas,
+//     commentSagas
+//   ])
+// }
+
 export {sagas}

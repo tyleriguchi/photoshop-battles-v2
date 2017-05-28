@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux'
 import {
   BrowserRouter as Router,
   Route,
@@ -11,10 +12,19 @@ import { formatData } from './utils'
 import Header from './Header'
 import ListView from './ListView'
 import ListItem from './ListItem'
+import CommentList from './CommentList'
+
+import { fetchPosts } from '../data/posts'
 
 import './App.scss';
 
 class App extends Component {
+  componentDidMount() {
+    const { fetchPosts } = this.props
+
+    fetchPosts()
+  }
+
   render() {
     return (
       <Router>
@@ -27,11 +37,15 @@ class App extends Component {
               </div>
             )}
           />
-          <Route path='/:id' component={ListItem} />
+        <Route path='/:id' component={CommentList} />
         </div>
       </Router>
     );
   }
 }
 
-export default App;
+const mapDispatchToProps = {
+  fetchPosts
+}
+
+export default connect((state) => state, mapDispatchToProps)(App);

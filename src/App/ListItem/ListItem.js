@@ -1,19 +1,28 @@
-import React from 'react'
+import React, { PureComponent } from 'react'
+import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 
 import './ListItem.css'
 
-export default function ListItem(props) {
-  const { title, thumbnail, linkTo } = props
+export class ListItem extends PureComponent {
+  componentDidMount(){
+    //fetch the comments
+  }
 
-  if (!thumbnail || thumbnail === 'self') return null
+  render() {
+    const { title, thumbnail, linkTo } = this.props
 
-  return (
-    <li>
-      <Link to={linkTo} className='list-item'>
-        <img src={thumbnail} alt='thumbnail' />
-        <h2>{title}</h2>
-      </Link>
-    </li>
-  )
+    if (!thumbnail || thumbnail === 'self') return null
+
+    return (
+      <li>
+        <Link to={linkTo} className='list-item'>
+          <img src={thumbnail} alt='thumbnail' />
+          <h2>{title}</h2>
+        </Link>
+      </li>
+    )
+  }
 }
+
+export default connect()(ListItem)

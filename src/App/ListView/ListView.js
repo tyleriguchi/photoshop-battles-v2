@@ -14,7 +14,7 @@ export class ListView extends Component {
   hasMatch(posts, pathname) {
     return posts.find( post => post.id === pathname.substring(1))
   }
-
+  
   renderItems() {
     const { posts, location: { pathname } } = this.props
 

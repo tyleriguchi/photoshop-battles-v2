@@ -6,3 +6,10 @@ export function receivePosts(posts) {
     posts
   }
 }
+
+export function fetchPosts() {
+  console.log('fetch')
+  return {
+    type: "POSTS_REQUESTED"
+  }
+}
